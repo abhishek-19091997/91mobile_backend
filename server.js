@@ -20,7 +20,7 @@ app.post("/", (req, res) => {
     }
   });
   console.log(req.files);
-  res.sendStatus(200);
+  return res.sendStatus(200);
 });
 app.get("/", (req, res) => {
   fs.readdir("./uploads", (err, files) => {
@@ -31,7 +31,7 @@ app.get("/", (req, res) => {
       //   console.log(file);
 
       // });
-      res.send(files);
+      return res.send(files);
     }
   });
 });
@@ -41,11 +41,11 @@ app.delete("/", (req, res) => {
   const location = path.join(__dirname, "uploads", name);
   fs.unlink(location, (err) => {
     if (err) {
-      res.sendStatus(err) ;
+      return res.sendStatus(err) ;
     }
     console.log("Delete File successfully.");
   });
-  res.sendStatus("Deleted Sucessfully");
+  return res.sendStatus("Deleted Sucessfully");
 });
 
 app.listen(8080, () => {
