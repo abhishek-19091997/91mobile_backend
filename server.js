@@ -16,11 +16,11 @@ app.post("/", (req, res) => {
   let uploadPath = __dirname + "/uploads/" + fileName;
   file.mv(uploadPath, (err) => {
     if (err) {
-      return res.send(err);
+      return res.sendStatus(err);
     }
   });
   console.log(req.files);
-  res.send(200);
+  res.sendStatus(200);
 });
 app.get("/", (req, res) => {
   fs.readdir("./uploads", (err, files) => {
@@ -41,11 +41,11 @@ app.delete("/", (req, res) => {
   const location = path.join(__dirname, "uploads", name);
   fs.unlink(location, (err) => {
     if (err) {
-      throw err;
+      res.sendStatus(err) ;
     }
     console.log("Delete File successfully.");
   });
-  res.send("Deleted Sucessfully");
+  res.sendStatus("Deleted Sucessfully");
 });
 
 app.listen(8080, () => {
